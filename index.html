@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Giada Muci — Portfolio</title>
+
+        <!-- 🔹 SEO BASE -->
+        <title>Giada Muci — Regista, Montatrice e Autrice | Portfolio Ufficiale</title>
+        <meta name="description" content="Portfolio ufficiale di Giada Muci, regista e montatrice italiana. Scopri film, cortometraggi e progetti audiovisivi tra cinema e televisione.">
+        <meta name="keywords" content="Giada Muci, regista, montatrice, autrice, portfolio, cinema, film indipendenti, cortometraggi, documentari, audiovisivo, regia televisiva, storytelling visivo">
+        <link rel="canonical" href="https://www.giadamuci.it/">
+
+        <!-- 🔹 OPEN GRAPH / SOCIAL -->
+        <meta property="og:title" content="Giada Muci — Regista e Montatrice | Portfolio Ufficiale">
+        <meta property="og:description" content="Scopri il portfolio di Giada Muci, regista e montatrice italiana specializzata in cinema e audiovisivo.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.giadamuci.it/">
+        <meta property="og:image" content="https://www.giadamuci.it/images/og-home.jpg">
+        <meta property="og:locale" content="it_IT">
+
+        <!-- 🔹 TWITTER CARD -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Giada Muci — Regista e Montatrice | Portfolio Ufficiale">
+        <meta name="twitter:description" content="Portfolio ufficiale di Giada Muci, regista e montatrice italiana. Scopri film e cortometraggi.">
+        <meta name="twitter:image" content="https://www.giadamuci.it/images/og-home.jpg">
+
+        <!-- 🔹 DATI STRUTTURATI JSON-LD -->
+        <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Giada Muci",
+        "jobTitle": "Regista, Montatrice e Autrice",
+        "url": "https://www.giadamuci.it/",
+        "image": "https://www.giadamuci.it/images/og-home.jpg",
+        "sameAs": [
+            "https://www.instagram.com/tuo_username",
+            "https://www.linkedin.com/in/tuo-profilo",
+            "https://vimeo.com/tuo-profilo"
+        ],
+        "description": "Portfolio ufficiale di Giada Muci, regista e montatrice italiana attiva tra cinema e audiovisivo."
+        }
+        </script>
+
+
+
+        <script>
+            (function(){ try{ var t = localStorage.getItem('site_theme'); if(!t && window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches) t='dark'; if(t) document.documentElement.setAttribute('data-theme', t); }catch(e){} })();
+        </script>
+        <link rel="stylesheet" href="stili/styles.css">
+    </head>
+    <body>
+        <header>
+            <div class="header-inner">
+                <div class="logo">Giada Muci</div>
+                <nav class="site-nav" role="navigation" aria-label="Main navigation">
+                    <div class="nav-links">
+                        <a href="index.html" class="active" >Home</a>
+                        <a href="about.html" >Chi Sono</a>
+                        <a href="projects.html" >Progetti</a>
+                        <a href="contact.html" >Contatti</a>
+                    </div>
+                    <button class="nav-toggle" id="navToggleIndex" aria-label="Apri menu" aria-expanded="false">
+                        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </button>
+                </nav>
+                <!-- Theme toggle control -->
+                <div class="theme-toggle" aria-hidden="false" title="Cambia tema">
+                    <button id="themeToggleBtn" aria-label="Cambia tema">Tema</button>
+                    <span class="dot" aria-hidden="true"></span>
+                </div>
+            </div>
+            <div class="mobile-menu" id="mobileMenuIndex" aria-hidden="true">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="projects.html">Projects</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </header>
+
+        <main class="container">
+            <section class="hero layout-two">
+                <div>
+                    <h2 class="hero-title" data-i18n="hero.title">Ciao, sono Giada</h2>
+                    <p class="muted" data-i18n="hero.subtitle">Regista · Montatrice · Autrice</p>
+                    <p style="margin-top:12px;">Benvenuti nel mio portfolio. Qui trovi i miei lavori più recenti, informazioni sul mio percorso e i contatti professionali.</p>
+                    <div style="margin-top:16px;"><a class="btn" href="about.html" data-i18n="hero.cta">Scopri di più</a></div>
+                </div>
+
+                <aside class="side-card" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+                    <div class="profile-photo" style="width:180px;height:180px;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#071019,#0b1220);display:flex;align-items:center;justify-content:center">
+                        <!-- Inserisci qui manualmente la foto del profilo modificando l'attributo `src` dell'elemento <img> via codice -->
+                        <img id="profileImage" src="https://giadamuci.my.canva.site/website/_assets/media/8fde86aaa301360de3d354522e0fd3bf.png" alt="Foto profilo" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                </aside>
+            </section>
+
+            <div class="divider"></div>
+
+            <section>
+                <h3 style="margin-bottom:12px">Progetti recenti</h3>
+                <div class="projects" id="recentProjects">
+                    <!-- I progetti recenti vengono popolati dinamicamente dai dati in projects-data.js -->
+                </div>
+            </section>
+        </main>
+
+        <script>
+            (function(){
+                const btn = document.getElementById('navToggleIndex');
+                const menu = document.getElementById('mobileMenuIndex');
+                if(btn && menu){
+                    btn.addEventListener('click', function(){
+                        menu.classList.toggle('open');
+                        btn.classList.toggle('open');
+                        menu.setAttribute('aria-hidden', !menu.classList.contains('open'));
+                    });
+                    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{menu.classList.remove('open');btn.classList.remove('open');menu.setAttribute('aria-hidden', true);}));
+                }
+            })();
+        </script>
+        <script src="projects-data.js"></script>
+        <script>
+            // Mostra gli ultimi 3 progetti definiti in projects-data.js
+            (function(){
+                function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+                function getSiteLang(){ try{ return localStorage.getItem('site_lang') || 'it'; }catch(e){ return 'it'; } }
+                function loc(p, field){ const lang = getSiteLang(); if(!p) return ''; return (p[field + '_' + lang] || p[field] || ''); }
+
+                const container = document.getElementById('recentProjects');
+                if(!container) return;
+                const items = Array.isArray(PROJECTS) ? PROJECTS.slice(0,3) : [];
+                if(items.length===0){ container.innerHTML = '<p class="muted" data-i18n="no.projects">Nessun progetto recente.</p>'; return; }
+                items.forEach(p=>{
+                    const a = document.createElement('a'); a.className='project-card stacked'; a.href = `projects.html#${encodeURIComponent(p.id||'')}`;
+                    const thumb = document.createElement('div'); thumb.className='project-thumb';
+                    if(p.thumb && p.thumb!=='blank'){
+                        const img = document.createElement('img'); img.src = p.thumb; img.alt = loc(p,'title') || '';
+                        thumb.appendChild(img);
+                    }
+                    a.appendChild(thumb);
+                    const title = document.createElement('h4'); title.className='project-title'; title.textContent = loc(p,'title') || '';
+                    a.appendChild(title);
+                    const year = document.createElement('div'); year.className='project-year'; year.textContent = (p['year_' + getSiteLang()] || p.year || '');
+                    a.appendChild(year);
+                    const desc = document.createElement('div');
+                    desc.className='project-desc';
+                    // mostra solo fino al primo punto (incluso) per la preview in homepage
+                    let d = loc(p,'desc') || '';
+                    const firstDot = d.indexOf('.');
+                    if(firstDot !== -1){ d = d.slice(0, firstDot + 1).trim(); }
+                    desc.textContent = d;
+                    a.appendChild(desc);
+                    container.appendChild(a);
+                });
+            })();
+        </script>
+        <script src="stili/theme-toggle.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                var btn = document.getElementById('themeToggleBtn');
+                if(btn && window.themeToggle){
+                    btn.addEventListener('click', function(){ window.themeToggle.toggle(); });
+                }
+            });
+        </script>
+    </body>
+</html>

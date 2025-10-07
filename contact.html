@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+        (function(){ try{ var t = localStorage.getItem('site_theme'); if(!t && window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches) t='dark'; if(t) document.documentElement.setAttribute('data-theme', t); }catch(e){} })();
+        </script>
+        <!-- 🔹 SEO BASE -->
+        <title>Contatti — Giada Muci, Regista e Montatrice</title>
+        <meta name="description" content="Contatta Giada Muci per collaborazioni, progetti audiovisivi o informazioni sul suo lavoro di regia e montaggio.">
+        <meta name="keywords" content="Giada Muci, contatti, regista, montatrice, collaborazioni, progetti, cinema, audiovisivo, film, cortometraggi">
+        <link rel="canonical" href="https://www.giadamuci.it/contact.html">
+
+        <!-- 🔹 OPEN GRAPH / SOCIAL -->
+        <meta property="og:title" content="Contatti — Giada Muci, Regista e Montatrice">
+        <meta property="og:description" content="Contatta Giada Muci per collaborazioni, regia e montaggio di progetti cinematografici e audiovisivi.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.giadamuci.it/contact.html">
+        <meta property="og:image" content="https://www.giadamuci.it/images/og-contact.jpg">
+        <meta property="og:locale" content="it_IT">
+
+        <!-- 🔹 TWITTER CARD -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Contatti — Giada Muci, Regista e Montatrice">
+        <meta name="twitter:description" content="Scrivi a Giada Muci per collaborazioni o progetti audiovisivi.">
+        <meta name="twitter:image" content="https://www.giadamuci.it/images/og-contact.jpg">
+
+        <!-- 🔹 DATI STRUTTURATI JSON-LD -->
+        <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "url": "https://www.giadamuci.it/contact.html",
+        "mainEntity": {
+            "@type": "Person",
+            "name": "Giada Muci",
+            "jobTitle": "Regista e Montatrice",
+            "email": "mailto:tuoindirizzo@example.com",
+            "sameAs": [
+            "https://www.instagram.com/tuo_username",
+            "https://www.linkedin.com/in/tuo-profilo",
+            "https://vimeo.com/tuo-profilo"
+            ]
+        },
+        "image": "https://www.giadamuci.it/images/og-contact.jpg",
+        "description": "Pagina contatti di Giada Muci, regista e montatrice italiana. Informazioni e canali ufficiali di comunicazione."
+        }
+        </script>
+
+
+        <link rel="stylesheet" href="stili/styles.css">
+    </head>
+    <body>
+        <header>
+            <div class="header-inner">
+                <div class="logo">Giada Muci</div>
+                <nav class="site-nav" role="navigation" aria-label="Main navigation">
+                    <div class="nav-links">
+                        <a href="index.html" >Home</a>
+                        <a href="about.html" >Chi Sono</a>
+                        <a href="projects.html" >Progetti</a>
+                        <a href="contact.html" class="active" >Contatti</a>
+                    </div>
+                </nav>
+
+            <div class="theme-toggle" aria-hidden="false" title="Cambia tema">
+                <button id="themeToggleBtn" aria-label="Cambia tema">Tema</button>
+                <span class="dot" aria-hidden="true"></span>
+            </div>
+            </div>
+        </header>
+
+        <main class="container">
+            <section id="contact-section" style="padding-top:24px">
+                <h1 data-i18n="contact.title">Contatti</h1>
+                <p class="muted">Scegli il canale che preferisci per metterti in contatto. Sostituisci i placeholder con i tuoi link/numero reali.</p>
+
+                <div class="projects" style="margin-top:18px; grid-template-columns:repeat(2,1fr);">
+                    <!-- Email -->
+                    <article class="project-card stacked">
+                        <div class="project-thumb" aria-hidden="true">
+                            <!-- simple envelope icon -->
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7" stroke="#f0c36c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 7l-9 6L3 7" stroke="#f0c36c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <h4 class="project-title">Email</h4>
+                        <div class="project-desc"><a class="btn" href="mailto:tuoindirizzo@example.com">tuoindirizzo@example.com</a></div>
+                    </article>
+
+                    <!-- WhatsApp -->
+                    <article class="project-card stacked">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 12.25a8.38 8.38 0 0 1-1.3 4.3 8.64 8.64 0 0 1-3.9 3.6l-.3.1-.6.2a8.39 8.39 0 0 1-4.1.1 8.4 8.4 0 0 1-6.5-6.5 8.38 8.38 0 0 1 .1-4.1l.2-.6.1-.3a8.64 8.64 0 0 1 3.6-3.9A8.38 8.38 0 0 1 11.75 3h.01" stroke="#25D366" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <h4 class="project-title">WhatsApp</h4>
+                        <div class="project-desc"><a class="btn" href="https://wa.me/tuonumero" target="_blank" rel="noopener">+39 tuonumero"</a></div>
+                    </article>
+
+                    <!-- LinkedIn -->
+                    <article class="project-card stacked">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#0A66C2" stroke-width="1.5"/><path d="M7 10v7" stroke="#0A66C2" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="7.5" r="1" fill="#0A66C2"/><path d="M11 10v7" stroke="#0A66C2" stroke-width="1.5" stroke-linecap="round"/><path d="M11 13c1.2 0 2-1 2-2.2V10" stroke="#0A66C2" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </div>
+                        <h4 class="project-title">LinkedIn</h4>
+                        <div class="project-desc"><a class="btn" href="https://www.linkedin.com/in/tuo-profilo" target="_blank" rel="noopener">Profilo LinkedIn</a></div>
+                    </article>
+
+                    <!-- Telegram -->
+                    <article class="project-card stacked">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M22 4L2 12l6 2 2 6 12-16z" stroke="#0088cc" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <h4 class="project-title">Telegram</h4>
+                        <div class="project-desc"><a class="btn" href="https://t.me/tuo_username" target="_blank" rel="noopener">@tuo_username</a></div>
+                    </article>
+
+                    <!-- Instagram -->
+                    <article class="project-card stacked">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#E1306C" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="#E1306C" stroke-width="1.2"/><circle cx="17.5" cy="6.5" r="0.5" fill="#E1306C"/></svg>
+                        </div>
+                        <h4 class="project-title">Instagram</h4>
+                        <div class="project-desc"><a class="btn" href="https://www.instagram.com/tuo_username" target="_blank" rel="noopener">@tuo_username</a></div>
+                    </article>
+
+                    <!-- Twitter -->
+                    <article class="project-card stacked">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M22 5.92c-.7.31-1.46.52-2.26.62a3.9 3.9 0 0 0 1.7-2.15c-.77.46-1.62.8-2.53.98A3.88 3.88 0 0 0 12 8.4c0 .31.03.62.1.91C8.11 9.17 5 7.13 2.9 4.01c-.34.6-.54 1.3-.54 2.04 0 1.4.71 2.63 1.79 3.35a3.83 3.83 0 0 1-1.76-.49v.05c0 1.96 1.4 3.6 3.25 3.97-.34.09-.7.14-1.07.14-.26 0-.52-.02-.77-.07.52 1.62 2.02 2.8 3.8 2.84A7.78 7.78 0 0 1 2 19.54 10.96 10.96 0 0 0 8.29 21c6.5 0 10.06-5.38 10.06-10.04v-.46c.7-.5 1.3-1.12 1.78-1.84-.64.28-1.32.47-2.03.55z" stroke="#1DA1F2" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <h4 class="project-title">Twitter</h4>
+                        <div class="project-desc"><a class="btn" href="https://twitter.com/tuo_username" target="_blank" rel="noopener">@tuo_username</a></div>
+                    </article>
+
+                    <!-- Vimeo -->
+                    <article class="project-card stacked">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M22 7.5c-1.14.76-2.23 1.2-3.27 1.31-1.15.12-1.85-.7-2.71-1.31-1.1-.75-1.77-1.03-2.24-1.03-.61 0-1.15.28-1.67.56-.63.33-1.28.68-2.15.68-1.27 0-2.54-.86-3.5-1.52L3 7.5v8.99l2.58-1.6c1.11-.67 2.09-1.26 3.4-1.26 1.64 0 2.67.99 4.07 1.73 1.17.6 2.16.12 2.78-.6 1.03-1.03 2.5-3.71 3.17-5.1V7.5z" stroke="#1AB7EA" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <h4 class="project-title">Vimeo</h4>
+                        <div class="project-desc"><a class="btn" href="https://vimeo.com/tuo-profilo" target="_blank" rel="noopener">Vimeo Channel</a></div>
+                    </article>
+                </div>
+
+            </section>
+        </main>
+
+        <script>
+            // piccolo script per mobile menu (coerente con il resto del sito)
+            (function(){
+                const btn = document.getElementById('navToggleIndex');
+                const menu = document.getElementById('mobileMenuIndex');
+                if(btn && menu){
+                    btn.addEventListener('click', ()=>{ btn.classList.toggle('open'); menu.classList.toggle('open'); menu.setAttribute('aria-hidden', !menu.classList.contains('open')); });
+                    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ menu.classList.remove('open'); btn.classList.remove('open'); menu.setAttribute('aria-hidden', true); }));
+                }
+            })();
+        </script>
+        <script src="stili/theme-toggle.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                var btn = document.getElementById('themeToggleBtn');
+                if(btn && window.themeToggle){
+                    btn.addEventListener('click', function(){ window.themeToggle.toggle(); });
+                }
+            });
+        </script>
+    </body>
+</html>

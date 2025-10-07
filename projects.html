@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- 🔹 SEO BASE -->
+    <title>Progetti di Giada Muci — Film, Cortometraggi e Documentari</title>
+    <meta name="description" content="Scopri i progetti audiovisivi di Giada Muci: film, cortometraggi, documentari e lavori di montaggio e regia.">
+    <meta name="keywords" content="Giada Muci, film, cortometraggi, documentari, progetti audiovisivi, regista, montatrice, regia, montaggio, cinema indipendente">
+    <link rel="canonical" href="https://www.giadamuci.it/projects.html">
+
+    <!-- 🔹 OPEN GRAPH / SOCIAL -->
+    <meta property="og:title" content="Progetti di Giada Muci — Film e Cortometraggi">
+    <meta property="og:description" content="Film, documentari e cortometraggi diretti o montati da Giada Muci. Scopri i suoi lavori audiovisivi.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.giadamuci.it/projects.html">     <!-- IGNORE --->
+    <meta property="og:image" content="https://www.giadamuci.it/images/og-projects.jpg">
+    <meta property="og:locale" content="it_IT">
+
+    <!-- 🔹 TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Progetti di Giada Muci — Film e Cortometraggi">
+    <meta name="twitter:description" content="Esplora i film, documentari e cortometraggi di Giada Muci. Regia e montaggio per il cinema e l’audiovisivo.">
+    <meta name="twitter:image" content="https://www.giadamuci.it/images/og-projects.jpg">
+
+<!-- 🔹 DATI STRUTTURATI JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWorkSeries",
+  "name": "Progetti di Giada Muci",
+  "url": "https://www.giadamuci.it/projects.html",
+  "image": "https://www.giadamuci.it/images/og-projects.jpg",
+  "creator": {
+    "@type": "Person",
+    "name": "Giada Muci",
+    "jobTitle": "Regista, Montatrice e Autrice"
+  },
+  "description": "Collezione di film, cortometraggi e documentari diretti o montati da Giada Muci, regista e montatrice italiana."
+}
+</script>
+
+
+    <script>
+      (function(){ try{ var t = localStorage.getItem('site_theme'); if(!t && window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches) t='dark'; if(t) document.documentElement.setAttribute('data-theme', t); }catch(e){} })();
+    </script>
+    <link rel="stylesheet" href="stili/styles.css">
+    <meta name="description" content="Elenco dei progetti di Giada Muci">
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <div class="logo">Giada Muci</div>
+        <nav class="site-nav" role="navigation" aria-label="Main navigation">
+          <div class="nav-links">
+            <a href="index.html" >Home</a>
+            <a href="about.html" >Chi Sono</a>
+            <a href="projects.html" class="active" >Progetti</a>
+            <a href="contact.html" >Contatti</a>
+          </div>
+        </nav>
+            <div class="theme-toggle" aria-hidden="false" title="Cambia tema">
+                <button id="themeToggleBtn" aria-label="Cambia tema">Tema</button>
+                <span class="dot" aria-hidden="true"></span>
+            </div>
+      </div>
+    </header>
+
+    <main class="container">
+  <h1 style="margin-bottom:8px" data-i18n="projects.recent">Progetti</h1>
+  <p class="muted">Qui trovi i dettagli e i materiali correlati dei vari progetti.</p>
+
+      <!-- La lista dei progetti viene popolata automaticamente dal file `projects-data.js`.
+           Per aggiungere/aggiornare progetti modifica il file `projects-data.js` e aggiungi oggetti
+           con le proprietà: id, title, year, role, desc, thumb (opzionale).
+      -->
+
+      <section id="projectsList" class="projects-list">
+        <!-- i progetti sono inseriti da projects-data.js -->
+      </section>
+    </main>
+
+    <script src="projects-data.js"></script>
+    <script>
+      // Rendering dei progetti a partire dalla variabile PROJECTS definita in projects-data.js
+      function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;'); }
+      function escapeAttr(s){ return escapeHtml(s).replace(/'/g, '&#39;'); }
+
+      function getSiteLang(){ try{ return localStorage.getItem('site_lang') || 'it'; }catch(e){ return 'it'; } }
+      function loc(p, field){ const lang = getSiteLang(); if(!p) return ''; return (p[field + '_' + lang] || p[field] || ''); }
+
+      function renderFromProjects(){
+        const list = document.getElementById('projectsList');
+        list.innerHTML = '';
+        if(!Array.isArray(PROJECTS) || PROJECTS.length===0){ list.innerHTML = '<p class="muted">Nessun progetto disponibile.</p>'; return; }
+        PROJECTS.forEach(p=>{
+          const a = document.createElement('a');
+          a.className = 'project-card';
+          a.href = `index.html#${encodeURIComponent(p.id||'')}`;
+
+          // create a thumbnail container and place the image inside it
+          const thumbContainer = document.createElement('div');
+          thumbContainer.className = 'project-thumb';
+          if(p.thumb){
+            const img = document.createElement('img');
+            img.src = p.thumb;
+            img.alt = loc(p,'title') || '';
+            thumbContainer.appendChild(img);
+          } else {
+            const ph = document.createElement('div');
+            ph.className = 'thumb-placeholder';
+            thumbContainer.appendChild(ph);
+          }
+          a.appendChild(thumbContainer);
+
+          const meta = document.createElement('div'); meta.className = 'project-meta';
+          const titleText = loc(p,'title') || '';
+          const yearText = p['year_' + getSiteLang()] || p.year || '';
+          meta.innerHTML = `<h4 class="project-title">${escapeHtml(titleText)}</h4><div class="project-year">${escapeHtml(yearText)}</div><div class="project-role">${escapeHtml(p.role||'')}</div>`;
+          a.appendChild(meta);
+
+          const desc = document.createElement('div'); desc.className='project-desc'; desc.textContent = loc(p,'desc') || '';
+          a.appendChild(desc);
+
+          list.appendChild(a);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', ()=>{ renderFromProjects(); });
+    </script>
+        <script src="stili/theme-toggle.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                var btn = document.getElementById('themeToggleBtn');
+                if(btn && window.themeToggle){
+                    btn.addEventListener('click', function(){ window.themeToggle.toggle(); });
+                }
+            });
+        </script>
+  </body>
+</html>

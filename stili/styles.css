@@ -428,3 +428,8 @@ header {
 .mobile-menu a:hover {
   background: var(--accent, #eee);
 }
+
+.project-label {
+  font-weight: bold;
+  color: #666;
+}

@@ -81,53 +81,18 @@
     </main>
 
     <script src="projects-data.js"></script>
+    <script src="project-utils/renderProject.js"></script>
     <script>
-      // Rendering dei progetti a partire dalla variabile PROJECTS definita in projects-data.js
-      function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;'); }
-      function escapeAttr(s){ return escapeHtml(s).replace(/'/g, '&#39;'); }
-
-      function getSiteLang(){ try{ return localStorage.getItem('site_lang') || 'it'; }catch(e){ return 'it'; } }
-      function loc(p, field){ const lang = getSiteLang(); if(!p) return ''; return (p[field + '_' + lang] || p[field] || ''); }
-
-      function renderFromProjects(){
+      (function(){
         const list = document.getElementById('projectsList');
-        list.innerHTML = '';
-        if(!Array.isArray(PROJECTS) || PROJECTS.length===0){ list.innerHTML = '<p class="muted">Nessun progetto disponibile.</p>'; return; }
-        PROJECTS.forEach(p=>{
-          const a = document.createElement('a');
-          a.className = 'project-card';
-          a.href = `index.html#${encodeURIComponent(p.id||'')}`;
+        if (!list || !Array.isArray(PROJECTS)) return;
+        const lang = localStorage.getItem('site_lang') || 'it';
 
-          // create a thumbnail container and place the image inside it
-          const thumbContainer = document.createElement('div');
-          thumbContainer.className = 'project-thumb';
-          if(p.thumb){
-            const img = document.createElement('img');
-            img.src = p.thumb;
-            img.alt = loc(p,'title') || '';
-            thumbContainer.appendChild(img);
-          } else {
-            const ph = document.createElement('div');
-            ph.className = 'thumb-placeholder';
-            thumbContainer.appendChild(ph);
-          }
-          a.appendChild(thumbContainer);
-
-          const meta = document.createElement('div'); meta.className = 'project-meta';
-          const titleText = loc(p,'title') || '';
-          const yearText = p['year_' + getSiteLang()] || p.year || '';
-          meta.innerHTML = `<h4 class="project-title">${escapeHtml(titleText)}</h4><div class="project-year">${escapeHtml(yearText)}</div><div class="project-role">${escapeHtml(p.role||'')}</div>`;
-          a.appendChild(meta);
-
-          const desc = document.createElement('div'); desc.className='project-desc'; desc.textContent = loc(p,'desc') || '';
-          a.appendChild(desc);
-
-          list.appendChild(a);
-        });
-      }
-
-      document.addEventListener('DOMContentLoaded', ()=>{ renderFromProjects(); });
+        const ordered = ProjectUtils.sortProjectsChronoDesc(PROJECTS);
+        ProjectUtils.renderProjects(list, ordered, lang, 0, false);
+      })();
     </script>
+
         <script src="stili/theme-toggle.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function(){

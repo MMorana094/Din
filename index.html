@@ -121,41 +121,18 @@
             })();
         </script>
         <script src="projects-data.js"></script>
+        <script src="project-utils/renderProject.js"></script>
         <script>
-            // Mostra gli ultimi 3 progetti definiti in projects-data.js
-            (function(){
-                function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-                function getSiteLang(){ try{ return localStorage.getItem('site_lang') || 'it'; }catch(e){ return 'it'; } }
-                function loc(p, field){ const lang = getSiteLang(); if(!p) return ''; return (p[field + '_' + lang] || p[field] || ''); }
+        (function(){
+            const list = document.getElementById('recentProjects');
+            if (!list || !Array.isArray(PROJECTS)) return;
+            const lang = localStorage.getItem('site_lang') || 'it';
 
-                const container = document.getElementById('recentProjects');
-                if(!container) return;
-                const items = Array.isArray(PROJECTS) ? PROJECTS.slice(0,3) : [];
-                if(items.length===0){ container.innerHTML = '<p class="muted" data-i18n="no.projects">Nessun progetto recente.</p>'; return; }
-                items.forEach(p=>{
-                    const a = document.createElement('a'); a.className='project-card stacked'; a.href = `projects.html#${encodeURIComponent(p.id||'')}`;
-                    const thumb = document.createElement('div'); thumb.className='project-thumb';
-                    if(p.thumb && p.thumb!=='blank'){
-                        const img = document.createElement('img'); img.src = p.thumb; img.alt = loc(p,'title') || '';
-                        thumb.appendChild(img);
-                    }
-                    a.appendChild(thumb);
-                    const title = document.createElement('h4'); title.className='project-title'; title.textContent = loc(p,'title') || '';
-                    a.appendChild(title);
-                    const year = document.createElement('div'); year.className='project-year'; year.textContent = (p['year_' + getSiteLang()] || p.year || '');
-                    a.appendChild(year);
-                    const desc = document.createElement('div');
-                    desc.className='project-desc';
-                    // mostra solo fino al primo punto (incluso) per la preview in homepage
-                    let d = loc(p,'desc') || '';
-                    const firstDot = d.indexOf('.');
-                    if(firstDot !== -1){ d = d.slice(0, firstDot + 1).trim(); }
-                    desc.textContent = d;
-                    a.appendChild(desc);
-                    container.appendChild(a);
-                });
-            })();
+            const ordered = ProjectUtils.sortProjectsChronoDesc(PROJECTS);
+            ProjectUtils.renderProjects(list, ordered, lang, 3, true);
+        })();
         </script>
+
         <script src="stili/theme-toggle.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function(){

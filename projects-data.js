@@ -5,17 +5,17 @@
 const PROJECTS = [
   {
     id: 'green-radio',
-    title: 'Titolo: Green Radio – Fuga dal GRA',
-    year: 'Anno: 2024',
-    role: 'Ruolo: Regia · Montaggio',
+    title: 'Green Radio – Fuga dal GRA',
+    year: '2024 - 2025',
+    role: 'Regia · Montaggio',
     desc: 'Un racconto di resistenza, sogni e libertà ai margini dell’asfalto. Una storia animata da voci ribelli, piume leggere e stormi in fuga. Una fuga poetica, tra realtà e immaginazione.',
     thumb: 'https://giadamuci.my.canva.site/website/_assets/media/f713f6ee01dca1998383aefed7b47f45.png'
   },
   {
     id: 'prova',
-    title: 'Titolo: prova',
-    year: 'Anno: 2028',
-    role: 'Ruolo: Regia · Montaggio',
+    title: 'prova',
+    year: '2023 - 2026',
+    role: 'Regia · Montaggio',
     desc: 'prova.',
     thumb: 'blank'
   }

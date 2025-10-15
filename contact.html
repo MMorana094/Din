@@ -53,23 +53,31 @@
     </head>
     <body>
         <header>
-            <div class="header-inner">
-                <div class="logo">Giada Muci</div>
-                <nav class="site-nav" role="navigation" aria-label="Main navigation">
-                    <div class="nav-links">
-                        <a href="index.html" >Home</a>
-                        <a href="about.html" >Chi Sono</a>
-                        <a href="projects.html" >Progetti</a>
-                        <a href="contact.html" class="active" >Contatti</a>
-                    </div>
-                </nav>
-
-            <div class="theme-toggle" aria-hidden="false" title="Cambia tema">
-                <button id="themeToggleBtn" aria-label="Cambia tema">Tema</button>
-                <span class="dot" aria-hidden="true"></span>
+    <div class="header-inner">
+        <div class="logo">Giada Muci</div>
+        <nav class="site-nav" role="navigation" aria-label="Main navigation">
+            <div class="nav-links">
+                <a href="index.html">Home</a> 
+                <a href="about.html">Chi Sono</a>
+                <a href="projects.html">Progetti</a>
+                <a href="contact.html" class="active">Contatti</a>
             </div>
-            </div>
-        </header>
+            <button class="nav-toggle" id="navToggle" aria-label="Apri menu" aria-expanded="false">
+                <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+            </button>
+        </nav>
+        <div class="theme-toggle" aria-hidden="false" title="Cambia tema">
+            <button id="themeToggleBtn" aria-label="Cambia tema">Tema</button>
+            <span class="dot" aria-hidden="true"></span>
+        </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <a href="index.html">Home</a>
+        <a href="about.html">Chi Sono</a>
+        <a href="projects.html">Progetti</a>
+        <a href="contact.html">Contatti</a>
+    </div>
+</header>
 
         <main class="container">
             <section id="contact-section" style="padding-top:24px">
@@ -144,26 +152,37 @@
 
             </section>
         </main>
+<script src="project-categories.js"></script>
+    <script src="projects-data.js"></script>
+    <script src="project-utils/renderProject.js"></script>
 
-        <script>
-            // piccolo script per mobile menu (coerente con il resto del sito)
-            (function(){
-                const btn = document.getElementById('navToggleIndex');
-                const menu = document.getElementById('mobileMenuIndex');
-                if(btn && menu){
-                    btn.addEventListener('click', ()=>{ btn.classList.toggle('open'); menu.classList.toggle('open'); menu.setAttribute('aria-hidden', !menu.classList.contains('open')); });
-                    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ menu.classList.remove('open'); btn.classList.remove('open'); menu.setAttribute('aria-hidden', true); }));
-                }
-            })();
-        </script>
-        <script src="stili/theme-toggle.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function(){
-                var btn = document.getElementById('themeToggleBtn');
-                if(btn && window.themeToggle){
-                    btn.addEventListener('click', function(){ window.themeToggle.toggle(); });
-                }
-            });
-        </script>
+    <script id="page-specific-logic">
+
+    </script>
+
+    <script>
+      (() => {
+        const btn = document.getElementById('navToggle');
+        const menu = document.getElementById('mobileMenu');
+        if (!btn || !menu) return;
+
+        btn.addEventListener('click', () => {
+            const isOpen = menu.classList.toggle('open');
+            btn.classList.toggle('open', isOpen);
+            menu.setAttribute('aria-hidden', !isOpen);
+            btn.setAttribute('aria-expanded', isOpen);
+        });
+      })();
+    </script>
+
+    <script src="stili/theme-toggle.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+          var btn = document.getElementById('themeToggleBtn');
+          if(btn && window.themeToggle){
+              btn.addEventListener('click', function(){ window.themeToggle.toggle(); });
+          }
+      });
+    </script>
     </body>
 </html>

@@ -1,435 +1,202 @@
 /* ==================================================
-	 GUIDA — Modifiche rapide
-
-	 Scopo: rendere facile e sicuro cambiare colori, font, header e anteprime
-	 senza dover navigare tutto il foglio di stile.
-
-	 Come usare questa guida:
-	 - Apri `stili/styles.css` e cerca la sezione ":root" (sotto questo
-		 commento). Queste sono le variabili globali: cambiale per aggiornare
-		 velocemente l'aspetto del sito.
-	 - Applica le modifiche, salva e ricarica la pagina nel browser.
-
-	 1) VARIABILI GLOBALI (consigliate)
-	 - Esempio: modifica il colore di accento
-		 Copia e incolla questa riga dentro il blocco :root e cambia il codice colore:
-			 --accent: #ff6b6b;    colore principale per bottoni/link 
-
-	 2) SFONDO (body)
-	 - Se vuoi cambiare il gradiente sostituisci la proprietà background in body.
-		 Esempio (gradiente più chiaro):
-			 body { background: linear-gradient(180deg,#f5f7fa 0%, #e9eef6 100%); }
-
-	 - Per usare un'immagine come sfondo (coprente):
-		 1) salva l'immagine in `stili/images/` o nella root del sito
-		 2) aggiungi nel selettore body:
-			 body { 
-				 background-image: url("/path/to/your-image.jpg"); 
-				 background-size: cover; 
-				 background-position: center; 
-			 }
-
-	 3) FONT
-	 - Per usare Google Fonts:
-		 1) aggiungi questo tag nel <head> del tuo HTML (index.html):
-				<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-		 2) poi cambia il font nel body:
-				body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial; }
-
-	 4) HEADER / NAVBAR
-	 - Per aumentare l'altezza dell'header modifica il padding in `.header-inner`.
-		 Esempio: rendere l'header più alto
-			 .header-inner { padding: 20px 28px; }
-
-	 - Per rendere l'header meno trasparente (più opaco):
-			 header { background: rgba(11,18,28,0.9); }
-
-	 5) ANTEPRIME PROGETTI (thumbnail)
-	 - Variabili principali in :root:
-			 --thumb-width: larghezza standard (es. 180px)
-			 --thumb-height: altezza massima per le immagini (es. 160px)
-
-	 - Esempio: imposta thumbnail 220x140
-			 :root{ --thumb-width:220px; --thumb-height:140px }
-
-	 - Se vuoi forzare un rapporto 16:9 (solo per stacked):
-			 .project-card.stacked .project-thumb { height: calc(var(--thumb-width) * 0.5625); }
-
-	 6) RESPONSIVE / BREAKPOINTS
-	 - I breakpoint principali sono già definiti:
-			 @media (max-width:980px)  => tablet large
-			 @media (max-width:900px)  => tablet small / landscape
-			 @media (max-width:640px)  => mobile
-	 - Modifica i valori se vuoi cambiare il comportamento su determinati schermi.
-
-	 7) CONSIGLI PRATICI
-	 - Fai sempre una copia di backup del blocco :root prima di cambiare molto.
-	 - Usa DevTools (F12) per provare i colori/edit live: cerca :root e modifica
-		 le variabili direttamente nella console per vedere l'effetto immediato.
-
+   1. VARIABILI GLOBALI (:root)
 ================================================== */
-
 :root{
-	--bg: #eef6f4;          /* sfondo chiaro, tenue verde acqua */
-	--card: #f7fbfa;        /* card e pannelli leggermente diversi dal bg */
-	--muted: #617f7b;       /* testo secondario, captions (verde desaturato) */
-	--accent: #6aa29a;      /* accento principale: verde acqua soft */
-	--accent-2: #ffb685;    /* accento secondario: pesca delicata */
-	--glass: rgba(16,24,20,0.02); /* overlay leggero per effetti glass */
-
-	/* Testi */
-	--text: #153a36;        /* colore testo primario (scuro ma non nero) */
-	--text-inverse: #ffffff;/* per elementi su accento */
-
-	/* Spaziatura e forme */
-	--radius: 12px;         /* Raggio angoli (card, bottoni) */
-
-	/* Anteprime progetti: dimensioni di riferimento */
-	--thumb-height: 160px;  /* Altezza massima delle immagini delle anteprime */
-	--thumb-width: 180px;   /* Larghezza della colonna miniatura (desktop) */
+	--bg: #eef6f4; --card: #f7fbfa; --muted: #617f7b; --accent: #6aa29a;
+	--accent-2: #ffb685; --glass: rgba(16,24,20,0.02); --text: #153a36;
+	--text-inverse: #ffffff; --radius: 12px; --thumb-height: 160px; --thumb-width: 180px;
 }
-
-/* Theme variants: light (default) and dark */
-:root[data-theme="light"]{
-	--bg: #eef6f4;
-	--card: #f7fbfa;
-	--muted: #617f7b;
-	--accent: #6aa29a;
-	--accent-2: #ffb685;
-	--glass: rgba(16,24,20,0.02);
-	--text: #153a36;
-	--text-inverse: #ffffff;
-}
-
 :root[data-theme="dark"]{
-	--bg: #0c121a;          /* sfondo generale (blu-nero) */
-	--card: #141b24;        /* un po’ più chiaro per rilievo morbido */
-	--muted: #aab4c2;       /* testo secondario più leggibile */
-	--accent: #90d0c6;      /* accento teal schiarito */
-	--accent-2: #ffb38a;    /* pesca più chiara */
-	--glass: rgba(255,255,255,0.06); /* overlay leggero */
-	--text: #e9f1f8;        /* testo chiaro ma non bianco puro */
-	--text-inverse: #0c121a;/* per bottoni o highlight su accent */
+	--bg: #0c121a; --card: #141b24; --muted: #aab4c2; --accent: #90d0c6;
+	--accent-2: #ffb38a; --glass: rgba(255,255,255,0.06); --text: #eaf1f8; --text-inverse: #0c121a;
 }
-
-
-/* Theme toggle control (small pill) */
-.theme-toggle{
-	display:inline-flex;align-items:center;gap:8px;padding:6px;border-radius:999px;background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01));border:1px solid rgba(0,0,0,0.03);
-}
-.theme-toggle button{background:transparent;border:0;padding:6px 8px;border-radius:8px;cursor:pointer;font-weight:700;color:var(--muted)}
-.theme-toggle .dot{width:18px;height:18px;border-radius:50%;background:var(--accent);display:inline-block}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-/* FONT e SFONDO
-   - Per cambiare il font usa la proprietà font-family qui sotto.
-   - Per cambiare lo sfondo modifica la proprietà background (gradiente) o
-	 sostituiscila con background-image per usare un'immagine di sfondo.
-*/
-body{
+/* ==================================================
+   2. STILI DI BASE E RESET
+================================================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+html, body { height: 100%; }
+body {
 	font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-	background: var(--bg);
-	color: var(--text);
-	-webkit-font-smoothing:antialiased;
-	-moz-osx-font-smoothing:grayscale;
-	line-height:1.5;
+	background: var(--bg); color: var(--text); line-height: 1.5;
+	-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
 }
-
-/* Container utility */
-.container{
-	max-width:1100px;
-	margin:0 auto;
-	padding:28px 20px;
-}
-
-/* Header / navbar */
-header{
-	position:fixed;
-	inset:0 0 auto 0;
-	top:0;
-	width:100%;
+/* ==================================================
+   3. LAYOUT PRINCIPALE
+================================================== */
+.container { max-width: 1100px; margin: 0 auto; padding: 28px 20px; }
+header {
+	position: relative; width: 100%;
 	background: linear-gradient(180deg, rgba(23,58,54,0.04), rgba(23,58,54,0.02));
-	backdrop-filter: blur(6px);
-	border-bottom:1px solid rgba(21,58,54,0.06);
-	z-index:99999; /* keep header above any injected overlays */
+	backdrop-filter: blur(6px); border-bottom: 1px solid rgba(21,58,54,0.06); z-index: 1000;
 }
-.header-inner{
-	max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px
+.header-inner {
+	max-width: 1100px; margin: 0 auto; padding: 14px 20px;
+	display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
-.logo{font-weight:700;color:var(--accent);letter-spacing:0.6px}
-.logo small{color:var(--muted);font-weight:600}
-nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-weight:600}
-nav a:hover{color:var(--text)}
-
-/* Hero / About header */
-#about-section{padding-top:110px;padding-bottom:40px}
-#about-section header{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-bottom:18px}
-#about-section h1{font-family: Georgia, serif; font-size: clamp(28px, 4vw, 40px); color:var(--text)}
-.subtitle{color:var(--muted);font-weight:600;margin-top:-6px}
-
-.bio{
-	background: linear-gradient(180deg, var(--card), rgba(41, 65, 53, 0.06));
-	border:1px solid rgba(21,58,54,0.04);
-	padding:22px 22px;
-	border-radius:var(--radius);
-	color: var(--text);
-	box-shadow: 0 6px 24px rgba(16,24,20,0.04);
+footer {
+	padding: 28px 20px; color: var(--muted); text-align: center;
+	border-top: 1px solid rgba(21,58,54,0.04); margin-top: 40px;
 }
-.bio p{margin-bottom:12px;font-size:1rem;color:var(--text)}
-
-/* Profile photo box (uses theme variables) */
-.profile-photo{width:180px;height:180px;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--card), rgba(247,251,250,0.02));}
-
-/* Accent rules for highlighted text */
-strong{color:var(--accent);}
-
-/* Projects / portfolio grid (generic) */
-.projects{
-	margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px
+.layout-two { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; margin-top: 18px; }
+.divider { height: 1px; background: linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent); margin: 18px 0; border-radius: 2px; }
+/* ==================================================
+   4. NAVIGAZIONE
+================================================== */
+.logo { font-weight: 700; color: var(--accent); letter-spacing: 0.6px; }
+.site-nav { display: flex; align-items: center; gap: 18px; }
+.nav-links { display: flex; gap: 18px; align-items: center; }
+.nav-links a {
+	color: var(--muted); text-decoration: none; padding: 8px 12px;
+	border-radius: 10px; font-weight: 600; transition: all .15s ease;
 }
-.project-card{
-	background: linear-gradient(180deg, var(--card), rgba(40, 68, 54, 0.06));
-	border-radius:12px;padding:14px;border:1px solid rgba(21,58,54,0.04);
-	overflow:hidden;transition:transform .22s ease, box-shadow .22s ease;
-	display:flex;               /* layout orizzontale: thumb a sinistra, contenuto a destra */
-	gap:16px;
-	align-items:flex-start;
-}
-
-/* Variante impilata: miniatura sopra, testo centrato (utilizzare .stacked sulla card) */
-.project-card.stacked{
-	flex-direction:column;
-	align-items:center;
-	text-align:center;
-	padding:18px;
-}
-.project-card.stacked .project-thumb{
-	flex:0 0 auto;
-	width: var(--thumb-width);
-	max-width:100%;
-	height: calc(var(--thumb-width) * 0.75); /* proporzione 4:3 come default */
-	margin-bottom:12px;
-}
-.project-card.stacked .project-meta{display:none}
-.project-card.stacked .project-title{margin-top:0}
-.project-card.stacked .project-year{margin-top:6px;color:var(--muted);font-weight:600}
-.project-card.stacked .project-desc{margin-top:8px}
-.project-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(16,24,20,0.06)}
-.project-thumb {
-	flex: 0 0 var(--thumb-width); /* larghezza fissa sul desktop */
-	max-width: var(--thumb-width);
-	height: var(--thumb-height);
-	border-radius: 8px;
-	background: linear-gradient(180deg, rgba(106,162,154,0.06), rgba(247,251,250,0.02));
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-	/* se viene usata una background image fallback, adattala proporzionalmente */
-	background-size: contain;
-	background-position: center;
-	background-repeat: no-repeat;
-}
-.project-thumb img {
-	/* Mantieni le proporzioni reali dell'immagine: non forzare dimensioni, usa limiti massimi */
-	width: auto;
-	height: auto;
-	max-width: 100%;     /* non superare la larghezza del contenitore */
-	max-height: var(--thumb-height); /* non superare l'altezza desiderata */
-	display: block;
-}
-.project-title{font-weight:700;color:var(--text)}
-.project-meta{display:flex;flex-direction:column;gap:6px}
-.project-year{font-size:0.9rem;color:var(--muted)}
-.project-role{font-size:0.92rem;color:var(--muted);font-weight:600}
-.project-desc{color:var(--muted);font-size:0.95rem;margin-top:8px}
-
-/* quando la card è orizzontale il contenuto principale occupa lo spazio rimanente */
-.project-meta, .project-desc{flex:1}
-
-/* Sidebar-style card for contact / small widgets */
-.side-card{
-	background: linear-gradient(180deg, var(--card), rgba(16,24,20,0.06));
-	border-radius:10px;padding:12px;border:1px solid rgba(21,58,54,0.04);
-}
-
-/* Buttons */
-.btn{
-	display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);color:var(--text-inverse);font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:transform .12s ease}
-.btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(255,255,255,0.06)}
-.btn:hover{transform:translateY(-3px);filter:brightness(1.03)}
-
-/* Footer */
-footer{padding:28px 20px;color:var(--muted);text-align:center;border-top:1px solid rgba(21,58,54,0.04);margin-top:40px}
-
-/* Utility: center column layout for about page */
-.layout-two{
-	display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start;margin-top:18px
-}
-
-/* Carosello / media placeholders */
-.media-row{display:flex;gap:12px;overflow:hidden}
-.media-thumb{flex:1;min-height:120px;border-radius:8px;background:linear-gradient(180deg, rgba(106,162,154,0.04), rgba(247,251,250,0.02))}
-
-/* Responsive */
-@media (max-width:980px){
-	.projects{grid-template-columns:repeat(2,1fr)}
-	.layout-two{grid-template-columns:1fr}
-}
-@media (max-width:900px){
-    /* riduci la larghezza base della thumb su schermi medi */
-	.project-thumb{flex:0 0 140px;max-width:140px;height:var(--thumb-height)}
-}
-@media (max-width:640px){
-    .header-inner{padding:12px}
-	nav a{margin-left:12px}
-	header{position:fixed}
-	.projects{grid-template-columns:1fr}
-
-	/* su mobile ripiega le card in colonna (thumb sopra) */
-	.project-card{flex-direction:column}
-	.project-thumb{flex-basis:auto;width:100%;max-width:100%;height:var(--thumb-height)}
-	.container{padding:20px}
-	#about-section{padding-top:90px}
-}
-
-/* Accessibility focus states */
-a:focus,button:focus{outline:3px solid rgba(106,162,154,0.18);outline-offset:3px}
-
-/* Small print / captions */
-.muted{color:var(--muted);font-size:0.92rem}
-
-/* Tiny decorative divider */
-.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent);margin:18px 0;border-radius:2px}
-
-/* --------------------
-   Navigation / Menu
-   -------------------- */
-.site-nav{
-	display:flex;
-	align-items:center;
-	gap:18px;
-}
-.nav-links{
-	display:flex;
-	gap:18px;
-	align-items:center;
-}
-.nav-links a{
-	color:var(--muted);
-	text-decoration:none;
-	padding:8px 12px;
-	border-radius:10px;
-	font-weight:600;
-	transition: background .15s ease, color .12s ease, transform .08s;
-}
-.nav-links a:hover{
-	color:#fff;
-	background: rgba(255,255,255,0.03);
-	transform:translateY(-2px);
-}
-.nav-links a.active{
-	color:var(--accent);
-	background:linear-gradient(90deg, rgba(240,195,108,0.14), rgba(255,122,89,0.06));
+.nav-links a:hover { color: #fff; background: rgba(255,255,255,0.03); transform: translateY(-2px); }
+.nav-links a.active {
+	color: var(--accent); background: linear-gradient(90deg, rgba(240,195,108,0.14), rgba(255,122,89,0.06));
 	box-shadow: 0 6px 18px rgba(240,195,108,0.06);
 }
-
-/* hamburger button */
-.nav-toggle{
-	display:none;
-	background:transparent;border:0;color:var(--muted);font-size:20px;padding:8px;border-radius:8px;cursor:pointer
+.nav-toggle { display: none; background: transparent; border: 0; color: var(--muted); font-size: 20px; padding: 8px; border-radius: 8px; cursor: pointer; }
+.nav-toggle:hover { color: #fff; background: rgba(255,255,255,0.03); }
+.hamburger { display: inline-block; width: 28px; height: 20px; position: relative; }
+.hamburger span {
+	display: block; position: absolute; height: 2px; background: var(--muted);
+	left: 0; right: 0; border-radius: 2px; transition: all .18s ease;
 }
-.nav-toggle:hover{color:#fff;background:rgba(255,255,255,0.03)}
-
-/* Hamburger icon */
-.hamburger{display:inline-block;width:28px;height:20px;position:relative}
-.hamburger span{display:block;position:absolute;height:2px;background:var(--muted);left:0;right:0;border-radius:2px;transition:transform .18s ease,opacity .12s ease,top .18s ease}
-.hamburger span:nth-child(1){top:0;background:var(--muted)}
-.hamburger span:nth-child(2){top:9px;background:var(--muted)}
-.hamburger span:nth-child(3){top:18px;background:var(--muted)}
-.nav-toggle.open .hamburger span:nth-child(1){top:9px;transform:rotate(45deg);background:var(--accent)}
-.nav-toggle.open .hamburger span:nth-child(2){opacity:0}
-.nav-toggle.open .hamburger span:nth-child(3){top:9px;transform:rotate(-45deg);background:var(--accent)}
-
-/* mobile menu (hidden by default) */
-.mobile-menu{
-	position:fixed;
-	right:20px;
-	top:70px;
-	width:calc(100% - 40px);
-	max-width:360px;
-	background:var(--card);
-	border-radius:12px;
-	border:1px solid rgba(21,58,54,0.04);
-	box-shadow:0 10px 30px rgba(16,24,20,0.04);
-	transform:scaleY(0);
-	transform-origin:top right;
-	transition:transform .18s ease, opacity .18s ease;
-	overflow:hidden;
-	z-index:1200;
-	opacity:0;
-	visibility:hidden;
-	pointer-events:none; /* prevent blocking clicks when hidden */
-}
-.mobile-menu.open{transform:scaleY(1); opacity:1; visibility:visible; pointer-events:auto}
-.mobile-menu a{display:block;padding:12px 16px;color:var(--text);text-decoration:none;border-bottom:1px solid rgba(21,58,54,0.04)}
-.mobile-menu a:last-child{border-bottom:none}
-.mobile-menu a:hover{color:var(--text-inverse);background:linear-gradient(90deg, rgba(106,162,154,0.12), rgba(255,182,133,0.06))}
-
-/* responsive switching */
-@media (max-width:640px){
-	.nav-links{display:none}
-	.nav-toggle{display:inline-flex}
-}
-
-/* Stili per le icone social */
-.social-links a svg {
-	width: 22px;
-	height: 22px;
-	fill: var(--muted);
-	transition: fill 0.2s ease, transform 0.2s ease;
-}
-
-.social-links a:hover svg {
-	fill: var(--accent);
-	transform: translateY(-3px);
-}
-
-/* --- MENU MOBILE FIX --- */
-header {
-  position: relative;
-  z-index: 1000;
-}
-
+.hamburger span:nth-child(1) { top: 0; } .hamburger span:nth-child(2) { top: 9px; } .hamburger span:nth-child(3) { top: 18px; }
+.nav-toggle.open .hamburger span:nth-child(1) { top: 9px; transform: rotate(45deg); background: var(--accent); }
+.nav-toggle.open .hamburger span:nth-child(2) { opacity: 0; }
+.nav-toggle.open .hamburger span:nth-child(3) { top: 9px; transform: rotate(-45deg); background: var(--accent); }
 .mobile-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background: var(--background, #fff);
-  display: none;
-  flex-direction: column;
-  text-align: center;
-  border-top: 1px solid var(--border, #ddd);
-  z-index: 9999; /* Assicura che stia sopra tutto */
+	position: absolute; right: 20px; top: 100%; width: calc(100% - 40px); max-width: 360px;
+	background: var(--card); border-radius: 12px; border: 1px solid rgba(21,58,54,0.04);
+	box-shadow: 0 10px 30px rgba(16,24,20,0.04); transform: scaleY(0);
+	transform-origin: top right; transition: all .18s ease;
+	overflow: hidden; z-index: 1200; opacity: 0; visibility: hidden; pointer-events: none;
 }
-
-.mobile-menu.open {
-  display: flex;
+.mobile-menu.open { transform: scaleY(1); opacity: 1; visibility: visible; pointer-events: auto; }
+.mobile-menu a { display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid rgba(21,58,54,0.04); }
+/* ==================================================
+   5. COMPONENTI
+================================================== */
+.projects { margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.project-card {
+	background: linear-gradient(180deg, var(--card), rgba(40, 68, 54, 0.06));
+	border-radius: var(--radius); padding: 14px; border: 1px solid rgba(21,58,54,0.04);
+	overflow: hidden; transition: all .22s ease; display: flex; gap: 16px; align-items: flex-start;
 }
-
-/* Assicura che i link siano cliccabili e visibili */
-.mobile-menu a {
-  padding: 1rem;
-  color: var(--text, #111);
-  text-decoration: none;
+.project-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(16,24,20,0.06); }
+.project-thumb {
+	flex: 0 0 var(--thumb-width); max-width: var(--thumb-width); height: var(--thumb-height);
+	border-radius: 8px; background: linear-gradient(180deg, rgba(106,162,154,0.06), rgba(247,251,250,0.02));
+	display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
-
-.mobile-menu a:hover {
-  background: var(--accent, #eee);
+.project-thumb img { width: auto; height: auto; max-width: 100%; max-height: var(--thumb-height); display: block; }
+.project-content { flex: 1; display: flex; flex-direction: column; gap: 4px; text-align: left; }
+.project-card:not(.stacked) .project-title { font-family: Georgia, serif; }
+.project-card:not(.stacked) .project-role { color: var(--accent); font-weight: 700; }
+.project-card:not(.stacked) .project-year { font-size: 0.9rem; font-style: italic; }
+.project-card.stacked { flex-direction: column; align-items: stretch; text-align: center; padding: 18px; }
+.project-card.stacked .project-thumb { width: var(--thumb-width); max-width: 100%; height: calc(var(--thumb-width) * 0.75); margin: 0 auto 12px auto; }
+.project-card.stacked .project-content { text-align: center; }
+.project-label { display: none; }
+.project-card.stacked .project-label { display: inline; font-weight: bold; color: #666; }
+.project-title { font-weight: 700; color: var(--text); }
+.project-role { font-size: 0.92rem; color: var(--muted); font-weight: 600; }
+.project-year { font-size: 0.9rem; color: var(--muted); }
+.project-desc { color: var(--muted); font-size: 0.95rem; margin-top: 8px; }
+.btn {
+	display: inline-block; padding: 10px 16px; border-radius: 10px; background: var(--accent);
+	color: var(--text-inverse); font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: all .12s ease;
 }
-
-.project-label {
-  font-weight: bold;
-  color: #666;
+.btn.secondary { background: transparent; color: var(--accent); border: 1px solid rgba(255,255,255,0.06); }
+.btn:hover { transform: translateY(-3px); filter: brightness(1.03); }
+.side-card { background: linear-gradient(180deg, var(--card), rgba(16,24,20,0.06)); border-radius:10px; padding:12px; border:1px solid rgba(21,58,54,0.04); }
+.profile-photo {
+	width: 180px; height: 180px; border-radius: 14px; overflow: hidden;
+	display: flex; align-items: center; justify-content: center;
+	background: linear-gradient(180deg,var(--card), rgba(247,251,250,0.02));
+}
+.theme-toggle { display: inline-flex; align-items: center; gap: 8px; padding: 6px; border-radius: 999px; background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01)); border: 1px solid rgba(0,0,0,0.03); }
+.theme-toggle button { background: transparent; border: 0; padding: 6px 8px; border-radius: 8px; cursor: pointer; font-weight: 700; color: var(--muted); }
+.theme-toggle .dot { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); display: inline-block; }
+.social-links a svg { width: 22px; height: 22px; fill: var(--muted); transition: all 0.2s ease; }
+.social-links a:hover svg { fill: var(--accent); transform: translateY(-3px); }
+/* ==================================================
+   6. CONTENUTI SPECIFICI DI PAGINA
+================================================== */
+.muted { color: var(--muted); font-size: 0.92rem; }
+strong { color: var(--accent); }
+/* -- Pagina About -- */
+#about-section header { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 18px; }
+#about-section h1 { font-family: Georgia, serif; font-size: clamp(28px, 4vw, 40px); color: var(--text); }
+.subtitle { color: var(--muted); font-weight: 600; margin-top: -6px; }
+.bio {
+	background: linear-gradient(180deg, var(--card), rgba(41, 65, 53, 0.06));
+	border: 1px solid rgba(21,58,54,0.04); padding: 22px; border-radius: var(--radius);
+	box-shadow: 0 6px 24px rgba(16,24,20,0.04);
+}
+.bio p { margin-bottom: 12px; font-size: 1rem; color: var(--text); }
+#interests-section { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(21, 58, 54, 0.08); }
+#interests-section .section-title { font-family: Georgia, serif; text-align: center; color: var(--accent); margin-bottom: 24px; }
+.interests-text { max-width: 70ch; margin: 0 auto; color: var(--muted); line-height: 1.7; }
+.interests-text p { margin-bottom: 1.5em; }
+.interests-quote {
+	margin-top: 32px; padding-left: 20px; border-left: 3px solid var(--accent-2);
+	font-family: Georgia, serif; font-style: italic; font-size: 1.1rem; color: var(--text);
+}
+/* -- Pagina Progetti -- */
+.projects-layout { display: grid; grid-template-columns: 200px 1fr; gap: 32px; margin-top: 24px; }
+.category-nav-vertical {
+	display: flex; flex-direction: column; gap: 8px;
+	position: sticky; top: 20px; align-self: start;
+}
+.category-nav-vertical a {
+	display: block; padding: 10px 16px; border-radius: var(--radius); background-color: var(--glass);
+	color: var(--muted); font-weight: 600; text-decoration: none; border: 1px solid transparent; transition: all 0.2s ease;
+}
+.category-nav-vertical a:hover { background-color: var(--accent); color: var(--text-inverse); transform: translateX(4px); }
+.category-title {
+	margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid rgba(21, 58, 54, 0.1);
+	color: var(--accent); font-family: Georgia, serif; text-align: center;
+}
+.category-title:first-of-type { margin-top: 0; }
+.category-description { margin: -8px auto 24px auto; max-width: 70ch; text-align: center; }
+.empty-category-message { padding: 20px; text-align: center; background-color: var(--glass); border-radius: var(--radius); margin-top: 12px; }
+.category-quote {
+  max-width: 65ch; margin: 24px auto; padding: 16px 20px;
+  border-left: 3px solid var(--accent); background-color: var(--glass);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-family: Georgia, serif; font-style: italic; font-size: 1.05rem;
+  line-height: 1.6; color: var(--text); text-align: center;
+}
+/* ==================================================
+   7. ACCESSIBILITÀ E MEDIA QUERIES
+================================================== */
+a:focus, button:focus { outline: 3px solid rgba(106,162,154,0.18); outline-offset: 3px; }
+@media (max-width: 980px) {
+	.projects { grid-template-columns: repeat(2, 1fr); }
+	.layout-two { grid-template-columns: 1fr; }
+	.projects-layout { grid-template-columns: 1fr; }
+	.category-nav-vertical {
+		position: relative; top: auto; flex-direction: row; flex-wrap: wrap;
+		border-bottom: 1px solid rgba(21, 58, 54, 0.08); padding-bottom: 16px;
+	}
+	.category-nav-vertical a { border-radius: 999px; }
+}
+@media (max-width: 900px) {
+	.project-thumb { flex: 0 0 140px; max-width: 140px; }
+}
+@media (max-width: 640px) {
+	.header-inner { padding: 12px; }
+	.nav-links { display: none; }
+	.nav-toggle { display: inline-flex; }
+	.projects { grid-template-columns: 1fr; }
+	.project-card { flex-direction: column; }
+	.project-thumb {
+		flex-basis: auto; width: 100%; max-width: 100%;
+		height: auto; aspect-ratio: 16 / 9;
+	}
+    .project-thumb img { max-height: none; }
+	.project-content { text-align: left; }
+	.container { padding: 20px; }
 }

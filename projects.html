@@ -3,104 +3,134 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <!-- 🔹 SEO BASE -->
+    
     <title>Progetti di Giada Muci — Film, Cortometraggi e Documentari</title>
     <meta name="description" content="Scopri i progetti audiovisivi di Giada Muci: film, cortometraggi, documentari e lavori di montaggio e regia.">
-    <meta name="keywords" content="Giada Muci, film, cortometraggi, documentari, progetti audiovisivi, regista, montatrice, regia, montaggio, cinema indipendente">
     <link rel="canonical" href="https://www.giadamuci.it/projects.html">
 
-    <!-- 🔹 OPEN GRAPH / SOCIAL -->
-    <meta property="og:title" content="Progetti di Giada Muci — Film e Cortometraggi">
-    <meta property="og:description" content="Film, documentari e cortometraggi diretti o montati da Giada Muci. Scopri i suoi lavori audiovisivi.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.giadamuci.it/projects.html">     <!-- IGNORE --->
-    <meta property="og:image" content="https://www.giadamuci.it/images/og-projects.jpg">
-    <meta property="og:locale" content="it_IT">
-
-    <!-- 🔹 TWITTER CARD -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Progetti di Giada Muci — Film e Cortometraggi">
-    <meta name="twitter:description" content="Esplora i film, documentari e cortometraggi di Giada Muci. Regia e montaggio per il cinema e l’audiovisivo.">
-    <meta name="twitter:image" content="https://www.giadamuci.it/images/og-projects.jpg">
-
-<!-- 🔹 DATI STRUTTURATI JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CreativeWorkSeries",
-  "name": "Progetti di Giada Muci",
-  "url": "https://www.giadamuci.it/projects.html",
-  "image": "https://www.giadamuci.it/images/og-projects.jpg",
-  "creator": {
-    "@type": "Person",
-    "name": "Giada Muci",
-    "jobTitle": "Regista, Montatrice e Autrice"
-  },
-  "description": "Collezione di film, cortometraggi e documentari diretti o montati da Giada Muci, regista e montatrice italiana."
-}
-</script>
-
-
+    <link rel="stylesheet" href="stili/styles.css">
     <script>
       (function(){ try{ var t = localStorage.getItem('site_theme'); if(!t && window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches) t='dark'; if(t) document.documentElement.setAttribute('data-theme', t); }catch(e){} })();
     </script>
-    <link rel="stylesheet" href="stili/styles.css">
-    <meta name="description" content="Elenco dei progetti di Giada Muci">
   </head>
+  
   <body>
     <header>
-      <div class="header-inner">
-        <div class="logo">Giada Muci</div>
-        <nav class="site-nav" role="navigation" aria-label="Main navigation">
-          <div class="nav-links">
-            <a href="index.html" >Home</a>
-            <a href="about.html" >Chi Sono</a>
-            <a href="projects.html" class="active" >Progetti</a>
-            <a href="contact.html" >Contatti</a>
-          </div>
-        </nav>
+        <div class="header-inner">
+            <div class="logo">Giada Muci</div>
+            <nav class="site-nav" role="navigation" aria-label="Main navigation">
+                <div class="nav-links">
+                    <a href="index.html">Home</a> 
+                    <a href="about.html">Chi Sono</a>
+                    <a href="projects.html" class="active">Progetti</a>
+                    <a href="contact.html">Contatti</a>
+                </div>
+                <button class="nav-toggle" id="navToggle" aria-label="Apri menu" aria-expanded="false">
+                    <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+                </button>
+            </nav>
             <div class="theme-toggle" aria-hidden="false" title="Cambia tema">
                 <button id="themeToggleBtn" aria-label="Cambia tema">Tema</button>
                 <span class="dot" aria-hidden="true"></span>
             </div>
-      </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+            <a href="index.html">Home</a>
+            <a href="about.html">Chi Sono</a>
+            <a href="projects.html">Progetti</a>
+            <a href="contact.html">Contatti</a>
+        </div>
     </header>
 
     <main class="container">
-  <h1 style="margin-bottom:8px" data-i18n="projects.recent">Progetti</h1>
-  <p class="muted">Qui trovi i dettagli e i materiali correlati dei vari progetti.</p>
+        <h1 style="margin-bottom:8px">Progetti</h1>
+        <p class="muted">Qui trovi i dettagli e i materiali correlati dei vari progetti.</p>
 
-      <!-- La lista dei progetti viene popolata automaticamente dal file `projects-data.js`.
-           Per aggiungere/aggiornare progetti modifica il file `projects-data.js` e aggiungi oggetti
-           con le proprietà: id, title, year, role, desc, thumb (opzionale).
-      -->
-
-      <section id="projectsList" class="projects-list">
-        <!-- i progetti sono inseriti da projects-data.js -->
-      </section>
+        <div class="projects-layout">
+            <aside id="categoryNav" class="category-nav-vertical"></aside>
+            <div id="projectsList" class="projects-content-area">
+                </div>
+        </div>
     </main>
 
+    <script src="project-categories.js"></script>
     <script src="projects-data.js"></script>
     <script src="project-utils/renderProject.js"></script>
-    <script>
+    <script id="page-specific-logic">
       (function(){
-        const list = document.getElementById('projectsList');
-        if (!list || !Array.isArray(PROJECTS)) return;
-        const lang = localStorage.getItem('site_lang') || 'it';
+        const listContainer = document.getElementById('projectsList');
+        const navContainer = document.getElementById('categoryNav');
+        if (!listContainer || !navContainer || !Array.isArray(PROJECTS) || !Array.isArray(CATEGORIES)) return;
+        
+        listContainer.innerHTML = '';
+        navContainer.innerHTML = '';
 
-        const ordered = ProjectUtils.sortProjectsChronoDesc(PROJECTS);
-        ProjectUtils.renderProjects(list, ordered, lang, 0, false);
+        CATEGORIES.forEach(category => {
+          const navLink = document.createElement('a');
+          navLink.href = `#category-${category.id}`;
+          navLink.textContent = category.title;
+          navContainer.appendChild(navLink);
+
+          const categorySection = document.createElement('section');
+          categorySection.id = `category-${category.id}`;
+          
+          const categoryTitle = document.createElement('h2');
+          categoryTitle.className = 'category-title';
+          categoryTitle.textContent = category.title;
+          categorySection.appendChild(categoryTitle);
+          
+          if (category.description) {
+            const categoryDescription = document.createElement('p');
+            categoryDescription.className = 'category-description muted';
+            categoryDescription.textContent = category.description;
+            categorySection.appendChild(categoryDescription);
+          }
+          
+          if (category.quote) {
+            const categoryQuote = document.createElement('blockquote');
+            categoryQuote.className = 'category-quote';
+            categoryQuote.textContent = category.quote;
+            categorySection.appendChild(categoryQuote);
+          }
+
+          const projectsInCategory = PROJECTS.filter(p => p.category === category.id);
+          if (projectsInCategory.length > 0) {
+            const projectsGrid = document.createElement('div');
+            projectsGrid.className = 'projects';
+            categorySection.appendChild(projectsGrid);
+            ProjectUtils.renderProjects(projectsGrid, ProjectUtils.sortProjectsChronoDesc(projectsInCategory), 'it', 0, false);
+          } else {
+            const emptyMessage = document.createElement('p');
+            emptyMessage.className = 'empty-category-message muted';
+            emptyMessage.textContent = 'Nessun progetto disponibile in questa categoria al momento.';
+            categorySection.appendChild(emptyMessage);
+          }
+          listContainer.appendChild(categorySection);
+        });
       })();
     </script>
-
-        <script src="stili/theme-toggle.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function(){
-                var btn = document.getElementById('themeToggleBtn');
-                if(btn && window.themeToggle){
-                    btn.addEventListener('click', function(){ window.themeToggle.toggle(); });
-                }
-            });
-        </script>
+    <script>
+      (() => {
+        const btn = document.getElementById('navToggle');
+        const menu = document.getElementById('mobileMenu');
+        if (!btn || !menu) return;
+        btn.addEventListener('click', () => {
+            const isOpen = menu.classList.toggle('open');
+            btn.classList.toggle('open', isOpen);
+            menu.setAttribute('aria-hidden', !isOpen);
+            btn.setAttribute('aria-expanded', isOpen);
+        });
+      })();
+    </script>
+    <script src="stili/theme-toggle.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+          var btn = document.getElementById('themeToggleBtn');
+          if(btn && window.themeToggle){
+              btn.addEventListener('click', function(){ window.themeToggle.toggle(); });
+          }
+      });
+    </script>
+    
   </body>
 </html>

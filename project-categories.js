@@ -30,7 +30,7 @@ const CATEGORIES = [
   },
   { 
     id: 'Collaborazioni', 
-    title: 'Collaborazioni – Esperienze e percorsi condivisi',
+    title: 'Collaborazioni',
     description: 'Nel corso degli anni, ho avuto l’opportunità di collaborare con artisti, registi e professionisti in progetti di ogni genere: dal cinema al documentario, dai videoclip alla televisione. Queste esperienze hanno arricchito il mio bagaglio professionale e umano, permettendomi di esplorare molteplici ruoli tecnici e creativi.',
     quote: 'Ogni collaborazione è un intreccio di visioni, una sinfonia di voci che costruisce un’opera condivisa.' 
   },

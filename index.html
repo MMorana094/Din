@@ -3,48 +3,38 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Giada Muci — Portfolio</title>
 
-        <!-- 🔹 SEO BASE -->
-        <title>Giada Muci — Regista, Montatrice e Autrice | Portfolio Ufficiale</title>
-        <meta name="description" content="Portfolio ufficiale di Giada Muci, regista e montatrice italiana. Scopri film, cortometraggi e progetti audiovisivi tra cinema e televisione.">
-        <meta name="keywords" content="Giada Muci, regista, montatrice, autrice, portfolio, cinema, film indipendenti, cortometraggi, documentari, audiovisivo, regia televisiva, storytelling visivo">
-        <link rel="canonical" href="https://www.giadamuci.it/">
+        <title>Giada Muci — Regista, Montatrice e Autrice a Roma</title>
+        <meta name="description" content="Portfolio di Giada Muci, regista e montatrice di base a Roma. Scopri progetti di cinema, documentari e cortometraggi realizzati a Roma e in tutta Italia.">
+        <meta name="keywords" content="Giada Muci, regista Roma, montatrice Roma, autrice Roma, portfolio, cinema, film indipendenti, cortometraggi, documentari">
+        <link rel="canonical" href="https://mmorana094.github.io/Din/index.html">
 
-        <!-- 🔹 OPEN GRAPH / SOCIAL -->
-        <meta property="og:title" content="Giada Muci — Regista e Montatrice | Portfolio Ufficiale">
-        <meta property="og:description" content="Scopri il portfolio di Giada Muci, regista e montatrice italiana specializzata in cinema e audiovisivo.">
+        <meta property="og:title" content="Giada Muci — Regista e Montatrice a Roma | Portfolio">
+        <meta property="og:description" content="Scopri il portfolio di Giada Muci, regista e montatrice italiana specializzata in cinema e audiovisivo, con base a Roma.">
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://www.giadamuci.it/">
-        <meta property="og:image" content="https://www.giadamuci.it/images/og-home.jpg">
-        <meta property="og:locale" content="it_IT">
+        <meta property="og:url" content="https://mmorana094.github.io/Din/index.html">
+        <meta property="og:image" content="https://mmorana094.github.io/Din/images/og-home.jpg"> <meta property="og:locale" content="it_IT">
 
-        <!-- 🔹 TWITTER CARD -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Giada Muci — Regista e Montatrice | Portfolio Ufficiale">
-        <meta name="twitter:description" content="Portfolio ufficiale di Giada Muci, regista e montatrice italiana. Scopri film e cortometraggi.">
-        <meta name="twitter:image" content="https://www.giadamuci.it/images/og-home.jpg">
-
-        <!-- 🔹 DATI STRUTTURATI JSON-LD -->
-        <script type="application/ld+json">
+        <meta name="twitter:title" content="Giada Muci — Regista e Montatrice a Roma | Portfolio">
+        <meta name="twitter:description" content="Portfolio ufficiale di Giada Muci, regista e montatrice a Roma. Scopri film e cortometraggi.">
+        <meta name="twitter:image" content="https://mmorana094.github.io/Din/images/og-home.jpg"> <script type="application/ld+json">
         {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Giada Muci",
         "jobTitle": "Regista, Montatrice e Autrice",
-        "url": "https://www.giadamuci.it/",
-        "image": "https://www.giadamuci.it/images/og-home.jpg",
-        "sameAs": [
-            "https://www.instagram.com/tuo_username",
-            "https://www.linkedin.com/in/tuo-profilo",
-            "https://vimeo.com/tuo-profilo"
-        ],
-        "description": "Portfolio ufficiale di Giada Muci, regista e montatrice italiana attiva tra cinema e audiovisivo."
+        "url": "https://mmorana094.github.io/Din/index.html",
+        "image": "https://mmorana094.github.io/Din/images/og-home.jpg",
+        "description": "Portfolio ufficiale di Giada Muci, regista e montatrice italiana attiva a Roma e specializzata in cinema e audiovisivo.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Roma",
+            "addressCountry": "IT"
+        }
         }
         </script>
-
-
-
+        
         <script>
             (function(){ try{ var t = localStorage.getItem('site_theme'); if(!t && window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches) t='dark'; if(t) document.documentElement.setAttribute('data-theme', t); }catch(e){} })();
         </script>
@@ -52,31 +42,31 @@
     </head>
     <body>
         <header>
-    <div class="header-inner">
-        <div class="logo">Giada Muci</div>
-        <nav class="site-nav" role="navigation" aria-label="Main navigation">
-            <div class="nav-links">
-                <a href="index.html" class="active">Home</a> 
+            <div class="header-inner">
+                <div class="logo">Giada Muci</div>
+                <nav class="site-nav" role="navigation" aria-label="Main navigation">
+                    <div class="nav-links">
+                        <a href="index.html" class="active">Home</a> 
+                        <a href="about.html">Chi Sono</a>
+                        <a href="projects.html">Progetti</a>
+                        <a href="contact.html">Contatti</a>
+                    </div>
+                    <button class="nav-toggle" id="navToggle" aria-label="Apri menu" aria-expanded="false">
+                        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </button>
+                </nav>
+                <div class="theme-toggle" aria-hidden="false" title="Cambia tema">
+                    <button id="themeToggleBtn" aria-label="Cambia tema">Tema</button>
+                    <span class="dot" aria-hidden="true"></span>
+                </div>
+            </div>
+            <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+                <a href="index.html" class="active">Home</a>
                 <a href="about.html">Chi Sono</a>
                 <a href="projects.html">Progetti</a>
                 <a href="contact.html">Contatti</a>
             </div>
-            <button class="nav-toggle" id="navToggle" aria-label="Apri menu" aria-expanded="false">
-                <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
-            </button>
-        </nav>
-        <div class="theme-toggle" aria-hidden="false" title="Cambia tema">
-            <button id="themeToggleBtn" aria-label="Cambia tema">Tema</button>
-            <span class="dot" aria-hidden="true"></span>
-        </div>
-    </div>
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">Chi Sono</a>
-        <a href="projects.html">Progetti</a>
-        <a href="contact.html">Contatti</a>
-    </div>
-</header>
+        </header>
 
         <main class="container">
             <section class="hero layout-two">

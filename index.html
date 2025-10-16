@@ -98,8 +98,8 @@
         <footer>
             <p>&copy; 2025 Giada Muci. Tutti i diritti riservati.</p>
             <p>
-                <a href="https://www.iubenda.com/privacy-policy/17219369" class="iubenda-white iubenda-noiframe iubenda-embed" title="Privacy Policy">Privacy Policy</a>
-                <a href="https://www.iubenda.com/privacy-policy/17219369/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed" title="Cookie Policy">Cookie Policy</a>
+                <a href="https://www.iubenda.com/privacy-policy/17219369" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " title="Privacy Policy ">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+                <a href="https://www.iubenda.com/privacy-policy/17219369/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " title="Cookie Policy ">Cookie Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
             </p>
         </footer>
 
@@ -152,60 +152,5 @@
         </script>
         <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
 
-        <script>
-        function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                const date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax; Secure";
-        }
-
-        function getCookie(name) {
-            const nameEQ = name + "=";
-            const ca = document.cookie.split(';');
-            for(let i=0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-            }
-            return null;
-        }
-
-        function manageCookieConsent() {
-            // Se il nostro cookie esiste già, non fare nulla
-            if (getCookie('cookie_consent_accepted')) {
-                return;
-            }
-
-            // Funzione per controllare il cookie di Iubenda e impostare il nostro
-            const checkAndSetCookie = () => {
-                const iubendaCookieExists = document.cookie.split(';').some((item) => item.trim().startsWith('_iub_cs-'));
-                
-                if (iubendaCookieExists) {
-                    setCookie('cookie_consent_accepted', 'true', 365); // Crea un cookie che dura 1 anno
-                    console.log('Consenso Iubenda rilevato. Creato il cookie "cookie_consent_accepted".');
-                    return true; // Cookie impostato, interrompi i controlli
-                }
-                return false; // Continua a controllare
-            };
-
-            // Controlla subito, e poi a intervalli, finché non viene trovato
-            if (!checkAndSetCookie()) {
-                let checkCount = 0;
-                const maxChecks = 20; // Prova per 10 secondi
-                const intervalId = setInterval(() => {
-                    checkCount++;
-                    if (checkAndSetCookie() || checkCount >= maxChecks) {
-                        clearInterval(intervalId);
-                    }
-                }, 500);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', manageCookieConsent);
-        </script>
     </body>
 </html>

@@ -146,18 +146,43 @@
                 "cookiePolicyId": 17219369,
                 "banner": {
                     "position": "bottom"
-                },
-                "callback": {
-                    "onConsentGiven": function() {
-                        try {
-                            localStorage.setItem('cookie_consent_accepted', 'true');
-                        } catch (e) {
-                            console.error("Could not save cookie consent to localStorage", e);
-                        }
-                    }
                 }
             };
         </script>
         <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
+
+        <script>
+        function setConsentLocalStorageWhenIubendaCookieExists() {
+            if (localStorage.getItem('cookie_consent_accepted') === 'true') {
+                return;
+            }
+
+            const checkIubendaCookie = () => {
+                if (document.cookie.split(';').some((item) => item.trim().startsWith('_iub_cs-'))) {
+                    try {
+                        localStorage.setItem('cookie_consent_accepted', 'true');
+                        console.log('Consenso Iubenda rilevato. Impostato localStorage.');
+                        return true; 
+                    } catch (e) {
+                        console.error("Impossibile salvare il consenso dei cookie su localStorage", e);
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            if (!checkIubendaCookie()) {
+                let checkCount = 0;
+                const maxChecks = 20; // Controlla per 10 secondi (20 * 500ms)
+                const intervalId = setInterval(() => {
+                    checkCount++;
+                    if (checkIubendaCookie() || checkCount >= maxChecks) {
+                        clearInterval(intervalId);
+                    }
+                }, 500);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', setConsentLocalStorageWhenIubendaCookieExists);
+        </script>
     </body>
 </html>

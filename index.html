@@ -146,6 +146,15 @@
                 "cookiePolicyId": 17219369,
                 "banner": {
                     "position": "bottom"
+                },
+                "callback": {
+                    "onConsentGiven": function() {
+                        try {
+                            localStorage.setItem('cookie_consent_accepted', 'true');
+                        } catch (e) {
+                            console.error("Could not save cookie consent to localStorage", e);
+                        }
+                    }
                 }
             };
         </script>
